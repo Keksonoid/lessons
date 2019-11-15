@@ -11,15 +11,38 @@ let appData = {
     optionalExpenses: {},
     income: [],
     savings: false
-}
+};
 
-let a1 = prompt("Введите обязательную статью расходов в этом месяце", ''),
-	a2 = prompt("Во сколько обойдется?", ''),
-	a3 = prompt("Введите обязательную статью расходов в этом месяце", ''),
-    a4 = prompt("Во сколько обойдется?", '');
+
+for(let i = 0; i < 2; i++){
+    let a = prompt("Введите обязательную статью расходов в этом месяце", ''),
+        b = prompt("Во сколько обойдется?", '');
+
+    if((typeof(a) === 'string') && (typeof(a) != null) 
+        && (typeof(b) != null) && (a != '') && (b != '') 
+        && (a.length < 50)){
+        console.log("done");
+        appData.expenses[a] = b;
+    }else {
+        console.log("bad result");
+        i--;
+    }
+
+
     
-appData.expenses[a1] = a2;
-appData.expenses[a3] = a4;
+};
 
-alert(appData.budget / 30);
+appData.moneyPerDay = appData.budget / 30;
+
+alert("Ежедневный бюджет состовляет: " + appData.moneyPerDay);
+
+if(appData.moneyPerDay < 1000){
+    console.log("Минимальный уровень достатка");
+} else if(appData.moneyPerDay > 1000 && appData.moneyPerDay < 5000){
+    console.log("Средний уровень достака");
+} else if(appData.moneyPerDay > 5000){
+    console.log("Высокий уровень достатка");
+} else{
+    console.log("Произошла ошибка");
+}
 
